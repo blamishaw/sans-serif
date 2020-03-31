@@ -1,0 +1,51 @@
+html, body {
+  height: 100%;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-family: "Sen", sans-serif;
+}
+
+.top-banner {
+  background: #e3e1ed;
+}
+
+.app-name {
+  padding: 2vw;
+  font-size: 60px;
+  font-weight: bold;
+  color: #492f7f;
+}
+
+.search-wrapper {
+  padding: 4vw;
+  margin-top: 8vw;
+}
+
+
+#search-input {
+  border: none;
+  background: #f7f7f7;
+  padding: 1.2vw;
+  width: 29vw;
+  border-radius: 30px;
+  margin-right: 0.4vw;
+}
+
+#search-input:focus {
+  outline: none;
+}
+
+.search-btn {
+  padding: 1.2vw;
+  border: none;
+  border-radius: 30px;
+  width: 8vw;
+  background: #492f7f;
+  color: white;
+  margin-left: 0;
+}
+
+.search-btn:focus {
+  border: none;
+}

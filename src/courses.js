@@ -4,7 +4,7 @@ const proxy_url = 'https://cors-anywhere.herokuapp.com/';
 // Base API url
 const base_url = "http://api.asg.northwestern.edu/courses/?key=" + config.API_key;
 
-const get_courses = async (term, subject) => {
+const fetch_courses = async (term, subject) => {
   const url = base_url + "&term=" + term + "&subject=" + subject;
 
   let response = await fetch(proxy_url + url);
@@ -15,4 +15,18 @@ const get_courses = async (term, subject) => {
   }
 }
 
-get_courses(4760, "COMP_SCI");
+const get_courses = () => {
+  let input = document.querySelector('#search-input').value.toUpperCase();
+  fetch_courses(4760, input);
+}
+
+function search_click(ev) {
+  get_courses();
+}
+
+window.addEventListener('keypress', function(ev){
+  if (ev.key == 'Enter'){
+    ev.preventDefault();
+    get_courses();
+  }
+})

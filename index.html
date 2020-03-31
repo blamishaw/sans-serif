@@ -2,14 +2,30 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <script src="src/config.js"></script>
-    <script src="src/courses.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/master.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sen">
     <title></title>
   </head>
   <body>
 
+    <div class="container-fluid">
+      <div class="row top-banner">
+        <h1 class="app-name">Sans-Serif</h1>
+      </div>
+      <div class="container">
+        <div class="row search-wrapper">
+          <form class="search-form">
+            <input id="search-input" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            <button class="search-btn" type="button" onclick="search_click()">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
 
 
+    <script src="src/config.js"></script>
+    <script src="src/courses.js"></script>
   </body>
 </html>
