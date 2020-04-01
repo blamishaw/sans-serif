@@ -2,7 +2,7 @@
 const proxy_url = 'https://cors-anywhere.herokuapp.com/';
 
 // Base API url
-const base_url = "http://api.asg.northwestern.edu/courses/?key=" + config.API_key;
+const base_url = "http://api.asg.northwestern.edu/courses/details/?key=" + config.API_key;
 
 const make_card = (row_num, course) => {
 
@@ -13,7 +13,7 @@ const make_card = (row_num, course) => {
           <h5 class="course-title">${course.subject} <span style="font-size: 20px">${course.catalog_num}</span></h5>
           <h6 class="instructor-name">${course.title}</h6>
         </div>
-        <p class="card-text">${course.instructor}</p>
+        <p class="card-text">${course.instructor.name == "" ? "N/A" : course.instructor.name}</p>
       </div>
     </div>
     `;
