@@ -36,7 +36,7 @@ html, body {
   flex-grow: 0.9;
 }
 
-.make-schedule-btn {
+#make-schedule-btn {
   border: none;
   background: #492f7f;
   color: white;
@@ -50,12 +50,12 @@ html, body {
 
 }
 
-.make-schedule-btn:hover {
+#make-schedule-btn:hover {
   background: white;
   color: #492f7f;
 }
 
-.make-schedule-btn:focus {
+#make-schedule-btn:focus {
   outline: none;
 }
 

@@ -82,9 +82,21 @@ const store_user_input = () => {
   }
 }
 
+document.querySelector('#make-schedule-btn').addEventListener('click', function(ev) {
+    let courses = []
+
+    let courses = document.querySelectorAll('.course-selector');
+    for (let course of courses){
+      let subject = course.children[1].innerText;
+      let type = course.children[2].innerText;
+
+      subjects.push([subject, type])
+    }
+    log(courses);
+})
+
 window.addEventListener('DOMContentLoaded', (ev) => {
   create_selector_card();
   add_form_events();
   add_dropdown_events();
-
 })
