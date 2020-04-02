@@ -14,6 +14,11 @@ html, body {
 
 .top-banner {
   background: #e3e1ed;
+  display: flex;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 .app-name {
@@ -28,18 +33,48 @@ html, body {
   margin-top: 3.2vw;
   color: #492f7f;
   font-size: 20px;
+  flex-grow: 0.9;
+}
+
+.make-schedule-btn {
+  border: none;
+  background: #492f7f;
+  color: white;
+  padding: 1vw 2vw;
+  font-size: 1.1vw;
+  border-radius: 20px;
+  height: 4vw;
+  margin-top: 2vw;
+  margin-bottom: 2vw;
+  position: relative;
+
+}
+
+.make-schedule-btn:hover {
+  background: white;
+  color: #492f7f;
+}
+
+.make-schedule-btn:focus {
+  outline: none;
+}
+
+.container {
+  padding-top: 10vw;
 }
 
 /* END Header CSS */
 
 /* Course Selector Card CSS */
 
+
 .course-selector {
   padding: 4vw;
-  width: 50vw;
+  width: 60vw;
   margin-top: 3vw;
   background-color: #f7f7f7;
   min-width: 600px;
+  border-radius: 20px;
 }
 
 .class-num {
@@ -100,3 +135,9 @@ html, body {
 }
 
 /* END Area Button CSS */
+
+/* Make Button CSS */
+
+
+
+/* END Make Button CSS */

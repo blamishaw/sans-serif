@@ -73,6 +73,15 @@ const add_dropdown_events = () => {
   }
 }
 
+// Function that collects user input and stores it in localStorage when next button is clicked
+const store_user_input = () => {
+  for (let i = 0; i < 4; i++){
+    let subject = document.querySelector(`#subject-${i}`).innerText;
+    let type = document.querySelector(`#type-${i}`).innerText;
+    console.log(subject, type);
+  }
+}
+
 window.addEventListener('DOMContentLoaded', (ev) => {
   create_selector_card();
   add_form_events();
