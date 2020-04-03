@@ -1,4 +1,4 @@
-// Dynamically creates the dropdown menu with content from the above object
+// Dynamically creates the dropdown menu with content from macro.js
 const create_dropdown = () => {
   let dropdown_list = "";
 
@@ -82,19 +82,22 @@ const store_user_input = () => {
   }
 }
 
+// This event listener finds the subjects and credit types input by the user and passes them
+// to get_schedule.js – the file that runs the course selection algorithm
 document.querySelector('#make-schedule-btn').addEventListener('click', function(ev) {
-    let courses = []
+    let user_courses = []
 
     let courses = document.querySelectorAll('.course-selector');
     for (let course of courses){
       let subject = course.children[1].innerText;
       let type = course.children[2].innerText;
 
-      subjects.push([subject, type])
+      user_courses.push([subject, type])
     }
-    log(courses);
+    process_courses(user_courses);
 })
 
+// Creates the necessary HTML when the DOM is loaded
 window.addEventListener('DOMContentLoaded', (ev) => {
   create_selector_card();
   add_form_events();
