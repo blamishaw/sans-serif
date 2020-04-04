@@ -71,8 +71,6 @@ const alloc_time = (start_time, end_time, meeting_days) => {
       calendar[i][class_days[day]] = 1;
     }
   }
-  console.log(calendar);
-  console.log(start_time, end_time, meeting_days);
 }
 
 const is_alloc = (start_time, end_time, meeting_days) => {
@@ -115,9 +113,8 @@ const check_availaible = (course) => {
     alloc_time(start_time, end_time, meeting_days);
     return true;
   }
-  else {
-    return false;
-  }
+
+  return false;
 }
 
 // Removes an item from the user-input course list so it isn't reused
@@ -141,8 +138,10 @@ const select_random_course = (json) => {
 
   // Some courses have incomplete data -- no start/end times -- must search the whole list to find one
   let i;
-  for (i = 0; (!course.start_time && i < json.length); i++) {
+  for (i = 0; i < json.length; i++) {
     course = json[Math.floor(Math.random() * json.length)];
+    //if (course.catalog_num[0] == "4") continue;
+
     try {
       let allocated = check_availaible(course);
       if (allocated) break;
@@ -169,7 +168,6 @@ const fetch_courses = async (term, subject) => {
   if (response.ok) {
     let json = await response.json();
     let random_course = select_random_course(json);
-    console.log(random_course);
     return random_course;
   }
   return null;
@@ -177,7 +175,7 @@ const fetch_courses = async (term, subject) => {
 
 // Takes subject and credit type from user input and fetches API data
 const process_courses = async (courses) => {
-
+  let schedule = [];
   // Initialize the calendar
   calendar = init_matrix();
 
@@ -191,9 +189,14 @@ const process_courses = async (courses) => {
     while (user_type != undefined){
       courses = remove_item_from_courses(courses, user_type);
       course = await fetch_courses(TERM, user_type[0]);
-      //console.log(course);
+      schedule.push(course);
       user_type = courses.find(elem => elem[1] == credit_type);
     }
 
+  }
+  console.log(calendar);
+  for (let item of schedule){
+    let title = (item.catalog_num[0] == "4" && item.topic != null) ? item.topic : item.title
+    console.log(title, item.catalog_num, item.start_time, item.end_time, item.meeting_days);
   }
 }
