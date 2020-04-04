@@ -55,9 +55,9 @@ const base_url = "http://api.asg.northwestern.edu/courses/details/?key=" + confi
 // To check if a time has already been allocated, we organize the week into a 28x5 matrix
 // Length: 28 half-hour intervals between 8AM and 10PM
 // Width: 5 days of the school week
-let calendar = init_matrix();
+let calendar;
 
-function init_matrix() {
+const init_matrix = () => {
   let time_matrix = [];
   for (let i = 0; i < 29; i++){
     time_matrix.push([0, 0, 0, 0, 0]);
@@ -67,18 +67,19 @@ function init_matrix() {
 
 const alloc_time = (start_time, end_time, meeting_days) => {
   for (let day of meeting_days) {
-    for (let i = start_time; i < end_time; i++){
-      calendar[class_times[i]][class_days[day]] = 1;
-      console.log(calendar);
+    for (let i = class_times[start_time]; i < class_times[end_time]; i++){
+      calendar[i][class_days[day]] = 1;
     }
   }
+  console.log(calendar);
+  console.log(start_time, end_time, meeting_days);
 }
 
 const is_alloc = (start_time, end_time, meeting_days) => {
 
   for (let day of meeting_days){
     let day_col = calendar.map(col => col[class_days[day]]);
-    let time_of_class = day_col.slice(start_time, end_time);
+    let time_of_class = day_col.slice(class_times[start_time], class_times[end_time]);
 
     if (time_of_class.includes(1)) return false;
   }
@@ -99,6 +100,7 @@ const round_time = (time) => {
     }
     else hour = (parseInt(hour) + 1).toString();
   }
+  return hour + ":" + minutes;
 }
 
 // Determines course meeting days and start/end times. Calls is_alloc to determine
@@ -135,7 +137,7 @@ const select_random_course = (json) => {
     return null;
   }
 
-  let course = json[Math.floor(Math.random() * json.length)];
+  let course = "";
 
   // Some courses have incomplete data -- no start/end times -- must search the whole list to find one
   let i;
@@ -168,7 +170,6 @@ const fetch_courses = async (term, subject) => {
     let json = await response.json();
     let random_course = select_random_course(json);
     console.log(random_course);
-    console.log(calendar);
     return random_course;
   }
   return null;
@@ -176,6 +177,9 @@ const fetch_courses = async (term, subject) => {
 
 // Takes subject and credit type from user input and fetches API data
 const process_courses = async (courses) => {
+
+  // Initialize the calendar
+  calendar = init_matrix();
 
   for (let credit_type of credit_types){
     let user_type = courses.find(elem => (elem[1] == credit_type));
