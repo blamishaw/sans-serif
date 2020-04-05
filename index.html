@@ -4,8 +4,9 @@
     <meta charset="utf-8">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="static/master2.css">
+    <link rel="stylesheet" href="static/master.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sen">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Sans-Serif</title>
   </head>
   <body>
@@ -14,7 +15,7 @@
       <div class="row top-banner">
         <h1 class="app-name">Sans-Serif</h1>
         <h6 class="created-by">for Northwestern University</h6>
-        <button id="make-schedule-btn" type="button" name="button">Make Schedule</button>
+        <button id="make-schedule-btn" type="button" name="button">Make Schedule  <i class="fa fa-check"></i>   </button>
       </div>
 
       <div id="root" class="container">
@@ -27,6 +28,21 @@
 
 
       </div>
+      <div class="row justify-content-center">
+        <button id="add-class-btn" type="button" name="button"><i class="fa fa-plus"></i>  Add Class</button>
+
+      </div>
+
+      <div id="scheduleModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p class="schedule-display"></p>
+        </div>
+
+      </div>
+
 
 
     </div>

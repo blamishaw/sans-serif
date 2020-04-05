@@ -173,11 +173,16 @@ const fetch_courses = async (term, subject) => {
   return null;
 }
 
+const print_course = (course) => {
+  if (course == null) return;
+
+  let title = (course.catalog_num[0] == "4" && course.topic != null) ? course.topic : course.title;
+  console.log(title, course.catalog_num, course.start_time, course.end_time, course.meeting_days);
+}
+
 // Takes subject and credit type from user input and fetches API data
 const process_courses = async (courses) => {
   let schedule = [];
-  // Initialize the calendar
-  calendar = init_matrix();
 
   for (let credit_type of credit_types){
     let user_type = courses.find(elem => (elem[1] == credit_type));
@@ -192,11 +197,48 @@ const process_courses = async (courses) => {
       schedule.push(course);
       user_type = courses.find(elem => elem[1] == credit_type);
     }
-
   }
+
   console.log(calendar);
   for (let item of schedule){
-    let title = (item.catalog_num[0] == "4" && item.topic != null) ? item.topic : item.title
-    console.log(title, item.catalog_num, item.start_time, item.end_time, item.meeting_days);
+    print_course(item);
+  }
+  return schedule;
+}
+
+// This function is called from course_selector.js
+const make_schedule = (courses) => {
+  // Initialize the calendar
+  calendar = init_matrix();
+
+  // Process the courses
+  let schedule = process_courses(courses);
+  open_modal(schedule);
+}
+
+
+// JS for opening the modal to display course Schedule
+function open_modal(schedule) {
+  console.log(schedule);
+  let display_schedule = document.querySelector('.schedule-display');
+  display_schedule.innerText = "";
+
+  for (let course of schedule){
+    display_schedule.innerText += `Course: ${course.title}\n`;
+  }
+
+  document.querySelector('#scheduleModal').style.display = "block";
+}
+
+document.querySelector('.close').onclick = function() {
+  document.querySelector('#scheduleModal').style.display = "none";
+
+}
+
+window.onclick = function(ev) {
+  let modal = document.querySelector('#scheduleModal');
+
+  if (ev.target == modal) {
+    modal.style.display = "none";
   }
 }
