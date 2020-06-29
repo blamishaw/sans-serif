@@ -199,7 +199,7 @@ const process_courses = async (courses) => {
     }
   }
 
-  console.log(calendar);
+  // console.log(calendar);
   for (let item of schedule){
     print_course(item);
   }
@@ -207,24 +207,35 @@ const process_courses = async (courses) => {
 }
 
 // This function is called from course_selector.js
-const make_schedule = (courses) => {
+const make_schedule = async (courses) => {
   // Initialize the calendar
   calendar = init_matrix();
 
   // Process the courses
-  let schedule = process_courses(courses);
+  let schedule = await process_courses(courses);
   open_modal(schedule);
 }
 
 
 // JS for opening the modal to display course Schedule
-function open_modal(schedule) {
+const open_modal = (schedule) => {
   console.log(schedule);
+  if (schedule.length == 0){ return; }
+
   let display_schedule = document.querySelector('.schedule-display');
   display_schedule.innerText = "";
 
   for (let course of schedule){
-    display_schedule.innerText += `Course: ${course.title}\n`;
+    if (course != null) {
+      const template = `
+      <div style="padding: 2em">
+        <h3 style="font-size: 28px;">${course.title} <span style="font-size: 20px">${course.catalog_num}</span></h3>
+        <h4 style="font-size: 20px">${course.instructor.name}</h4>
+        <h5 style="font-size:15px">${course.meeting_days} ${course.start_time} - ${course.end_time}</h5>
+      </div>`
+
+      display_schedule.innerHTML += template;
+    }
   }
 
   document.querySelector('#scheduleModal').style.display = "block";
